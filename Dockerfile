@@ -37,7 +37,7 @@ zlib1g-dev \
 gedit \
 gpicview \
 r-base \
-perl \
+perl 
 
 
 RUN R -e "install.packages(c('heatmap.2','ggplots2','reshape2','dplyr','plyr'), repos = 'http://cran.rstudio.com/')" 
