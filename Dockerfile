@@ -39,8 +39,6 @@ gpicview \
 r-base \
 perl \
 
-RUN perl -MCPAN -e 'install File::Basename'
-
 
 RUN R -e "install.packages(c('heatmap.2','ggplots2','reshape2','dplyr','plyr'), repos = 'http://cran.rstudio.com/')" 
 
