@@ -37,9 +37,13 @@ zlib1g-dev \
 gedit \
 gpicview \
 r-base \
+<<<<<<< HEAD
 perl \
 gzip
 
+=======
+perl 
+>>>>>>> origin/master
 
 
 RUN R -e "install.packages(c('heatmap.2','ggplot2','reshape2','dplyr','plyr'), repos = 'http://cran.rstudio.com/')" 
@@ -57,9 +61,29 @@ RUN git clone https://github.com/lh3/bwa.git && \
   	cp bwa /usr/local/bin
 
 RUN git clone https://github.com/oharismendy/PipeDuct.git &&\
+<<<<<<< HEAD
 	mkdir -p /scratch &&\
 	chmod -R 755 /opt/PipeDuct
 	
 ENV PATH="/opt/PipeDuct/:${PATH}" 
 	
 WORKDIR /scratch
+=======
+ cd PipeDuct &&\
+ cp pipeduct* /usr/local/bin 
+
+
+WORKDIR /opt
+
+RUN groupadd -r -g 1000 ubuntu &&\
+    useradd -r -g ubuntu -u 1000 -d /home/ubuntu ubuntu &&\
+    adduser ubuntu sudo &&\
+    echo "ubuntu ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers &&\
+    mkdir -p /home/ubuntu &&\
+    chown -R ubuntu:ubuntu /home/ubuntu
+    
+USER ubuntu
+WORKDIR /home/ubuntu
+
+#CMD ["/bin/bash"]
+>>>>>>> origin/master
