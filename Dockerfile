@@ -38,11 +38,11 @@ gedit \
 gpicview \
 r-base \
 perl \
+gzip
 
-RUN perl -MCPAN -e 'install File::Basename'
 
 
-RUN R -e "install.packages(c('heatmap.2','ggplots2','reshape2','dplyr','plyr'), repos = 'http://cran.rstudio.com/')" 
+RUN R -e "install.packages(c('heatmap.2','ggplot2','reshape2','dplyr','plyr'), repos = 'http://cran.rstudio.com/')" 
 
 RUN pip install --upgrade pip &&\
     pip install weblogo 
@@ -57,19 +57,9 @@ RUN git clone https://github.com/lh3/bwa.git && \
   	cp bwa /usr/local/bin
 
 RUN git clone https://github.com/oharismendy/PipeDuct.git &&\
- cd PipeDuct &&\
- cp pipeduct* /usr/local/bin 
-
-
-WORKDIR /opt
-
-RUN groupadd -r -g 1000 ubuntu &&\
-    useradd -r -g ubuntu -u 1000 -d /home/ubuntu ubuntu &&\
-    echo "ubuntu ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers &&\
-    mkdir -p /home/ubuntu &&\
-    chown -R ubuntu:ubuntu /home/ubuntu
-    
-USER ubuntu
-WORKDIR /home/ubuntu
-
-#CMD ["/bin/bash"]
+	mkdir -p /scratch &&\
+	chmod -R 755 /opt/PipeDuct
+	
+ENV PATH="/opt/PipeDuct/:${PATH}" 
+	
+WORKDIR /scratch
